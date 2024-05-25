@@ -1,9 +1,10 @@
-
-# PLATELINKER
+ # PLATELINKER
 
 PlateLinker is a platform designed to connect restaurants with surplus food to nearby NGOs and charitable organizations. The goal is to reduce food waste and help feed the needy by facilitating the donation of surplus food in real-time.
 
-![platelinker_donation](https://github.com/Kunal1223/NMIT_HACKS/assets/120008204/0e6642cc-3fab-45ec-9a4f-ba59a7ad2bfa)
+
+![platelinker_donation](https://github.com/Kunal1223/NMIT_HACKS/assets/120008204/586bc90b-06d1-4399-91f7-1953a0289700)
+
 
 
 ## Table of Contents 
@@ -29,11 +30,11 @@ Food waste is a significant issue worldwide, with many restaurants often having 
 
 ## Technology Stack
 
-* Frontend: ReactJS, TailWind
-* Backend: NodeJS, ExpressJS
-* Database: MongoDB
-* Authentication: Json Web Token 
-* APIs: Using Rest API
+* Frontend: 
+* Backend: 
+* Database: 
+* Authentication: 
+* APIs: 
 * Hosting: 
 ## Installation
 
