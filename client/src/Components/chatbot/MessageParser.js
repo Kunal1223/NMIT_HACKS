@@ -1,45 +1,43 @@
 class MessageParser {
-    constructor(actionProvider, state) {
-      this.actionProvider = actionProvider;
-      this.state = state;
-    }
-   
-    parse(message) {
+  constructor(actionProvider, state) {
+    this.actionProvider = actionProvider;
+    this.state = state;
+  }
 
-      const lowerCase = message.toLowerCase();
+  parse(message) {
+    const lowerCase = message.toLowerCase();
 
-      if(lowerCase.includes("hello") ||  lowerCase.includes("hi") ){
-        this.actionProvider.hellohandler();
-      }
-
-      else if(lowerCase.includes("kunal") || lowerCase.includes("kishor")){
-        this.actionProvider.kunalHandler();
-      }
-
-      else if(lowerCase.includes("bengaluru")){
-        this.actionProvider.locateHandler();
-      }
-
-      else if(lowerCase.includes("")){
-        this.actionProvider.spaceHandler();
-      }
-
-      else if(lowerCase.includes("cricket")){
-        this.actionProvider.hobbyHandler();
-      }
-
-      else if(lowerCase.includes("yes")){
-        this.actionProvider.yesHandler();
-      }
-
-      else if(lowerCase.includes("thank")){
-        this.actionProvider.thankHandler();
-      }
-
-      else{
-        this.actionProvider.errorHandler();
-      }
+    if (lowerCase.includes("hello") || lowerCase.includes("hi")) {
+      this.actionProvider.hellohandler();
+    } 
+    else if (lowerCase.includes("platform works") || lowerCase.includes("tutorial") || lowerCase.includes("services")) {
+      this.actionProvider.platformHandler();
+    } 
+    else if (lowerCase.includes("active area") || lowerCase.includes("active in area") || lowerCase.includes("present")) {
+      this.actionProvider.locateHandler();
+    } 
+    else if (lowerCase.includes("requirements") || lowerCase.includes("registration")) {
+      this.actionProvider.ngoHandler();
+    } 
+    else if (lowerCase.includes("menu") || lowerCase.includes("choice of food")) {
+      this.actionProvider.menuyesHandler();
+    } 
+    else if (lowerCase.includes("thanks") || lowerCase.includes("thank you")) {
+      this.actionProvider.thankHandler();
+    } 
+    else if (lowerCase.includes("accept") || lowerCase.includes("picked")) {
+      this.actionProvider.acceptHandler();
+    } 
+    else if (lowerCase.includes("multiple") || lowerCase.includes("more than two")) {
+      this.actionProvider.multipleHandler();
+    } 
+    else if (lowerCase.trim() === "") {
+      this.actionProvider.spaceHandler();
+    } 
+    else {
+      this.actionProvider.errorHandler();
     }
   }
-  
-  export default MessageParser;
+}
+
+export default MessageParser;
