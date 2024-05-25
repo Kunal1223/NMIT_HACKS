@@ -116,6 +116,9 @@ router.post(
     body('VegPacketsType', 'Enter the type of veg packets').isLength({ min: 3 }),
     body('NonVegPacketsType', 'Enter the type of non veg packets').isLength({ min: 3 }),
     body('userEmail', 'Enter a valid email').isEmail(),
+    body('resEmail', 'Enter a valid email').isEmail(),
+  
+    // Remove isInt() validation for totalPrice
   ],
   async (req, res) => {
     try {
@@ -131,7 +134,10 @@ router.post(
         Messege,
         userEmail,
         VegPacketsType,
-        NonVegPacketsType
+        NonVegPacketsType,
+        resEmail,
+       
+        totalPrice
       } = req.body;
 
       const order = new Order({
@@ -142,6 +148,9 @@ router.post(
         userEmail,
         VegPacketsType,
         NonVegPacketsType,
+        resEmail,
+       
+        totalPrice
       });
 
       const savedOrder = await order.save();
@@ -170,45 +179,38 @@ router.get("/fetchallorders", async (req, res) => {
 
 //update note
 
-// router.put("/updateorder/:id", fetchuser, async (req, res) => {
-//   const { Restro, VegPackets, NonVngPackets, Messege } = req.body;
+router.put("/updateorder/:id", async (req, res) => {
+  const { status } = req.body;
 
-//   const newOrder = {};
-//   if (Restro) {
-//     newOrder.Restro = Restro;
-//   }
+  // Validate if status is provided
+  if (!status) {
+    return res.status(400).json({ error: "Status is required" });
+  }
 
-//   if (VegPackets) {
-//     newOrder.VegPackets = VegPackets;
-//   }
-//   if (NonVngPackets) {
-//     newOrder.NonVngPackets = NonVngPackets;
-//   }
+  try {
+    // Find and update the order by id
+    let order = await Order.findByIdAndUpdate(
+      req.params.id,
+      { $set: { status } },
+      { new: true }
+    );
 
-//  if (Messege) {
-//     newOrder.Messege = Messege;
-//   }
+    // If order not found, return 404
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
 
-//   try {
-//     let order = await Order.findByIdAndUpdate(
-//       req.params.id,
-//       { $set: newOrder }, // Use $set to update specific fields
-//       { new: true }
-//     );
+    // Check if the order belongs to the authenticated user (pseudo code)
+    // if (order.userId !== req.user.id) {
+    //   return res.status(403).json({ error: "Unauthorized" });
+    // }
 
-//     if (!order) {
-//       return res.status(404).send("Not found");
-//     }
-
-//     if (order.user.toString() !== req.user.id) {
-//       return res.status(401).send("Not allowed");
-//     }
-
-//     res.json({ order });
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
-
+    // Return the updated order
+    res.json(order);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 module.exports = router;

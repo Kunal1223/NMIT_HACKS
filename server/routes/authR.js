@@ -7,6 +7,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 // const fetchuser = require("../middleware/fetchuser");
+const Order = require("../models/Order.js");
 
 async function fetchLocationByEmail(email) {
   const ngoUser = await NGO.findOne({ email: email });
@@ -170,6 +171,19 @@ router.get("/fetchallres", async (req, res) => {
 });
 
 
+//fetch res order
+router.get("/fetchallorders", async (req, res) => {
+  const email = req.query.email;
+  try {
+    const order = await Order.find({
+      resEmail: email,
+    });
+    res.json(order);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 // router.post("/getuser", fetchuser, async (req, res) => {
 //   try {

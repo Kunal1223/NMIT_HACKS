@@ -11,6 +11,12 @@ const OrderSchema = new Schema({
         required:true,
         
      }, 
+     resEmail:{
+        type:String,
+        required:true,
+        
+     }, 
+     
     Restro: {
         type: String,
         required: true,
@@ -40,7 +46,11 @@ const OrderSchema = new Schema({
         type:String,
         default:"Order waiting to accept"
     },
-
+    totalPrice: {
+        type: Number,
+        required: true,
+        default:0
+    },
     date: {
         type: Date,
         default: Date.now

@@ -15,6 +15,7 @@ import ParticularResCard from './Components/NGO/ParticularResCard';
 import Order from './Components/Userlogin/Order.js';
 import OrderState from './Components/context/Order/OrderState';
 
+import ResOrder from './Components/Restaurant/ResOrder.js'
 function App() {
   return (
     <>
@@ -33,6 +34,8 @@ function App() {
               <Route path='/particular' element={<ParticularCard />} />
               <Route path='/particularres' element={<ParticularResCard />} />
               <Route path='/orders' element={<Order/>} />
+              <Route path='/resorder' element={<ResOrder/>} />
+
             </Routes>
             <Footer />
           </BrowserRouter>

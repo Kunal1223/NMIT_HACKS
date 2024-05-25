@@ -18,6 +18,11 @@ const Restaurant = () => {
     getNGO(email);
   }, [NGO, getNGO]);
 
+  const ResOrder=(e)=>{
+    e.preventDefault();
+    Navigate("/resorder");
+  }
+
   const returback = (e) => {
     e.preventDefault();
     Navigate('/');
@@ -34,12 +39,21 @@ const Restaurant = () => {
         <div className='text mx-10'>
           <h1 className='text-3xl font-bold'>Don't throw the surplus leftovers, <br /> donate them to<span className='text-green-500' > NGOs for the needy</span></h1>
           <button
-            className='bg-green-500 text-white absolute my-6 py-2 px-5
+            className='bg-green-500 text-white my-6 py-2 px-20
           rounded-lg cursor-pointer animated-button'
             onClick={movePacket}
           >
             Add Donation
           </button>
+          <div>
+              <button
+                className="bg-green-500 text-white relative  my-6 py-2
+          rounded-lg cursor-pointer   "
+                onClick={ResOrder}
+              >
+                Orders
+              </button>
+            </div>
         </div>
 
         <div className='w-[420px]'>
