@@ -27,21 +27,6 @@ const Ngo = () => {
 
   return (
     <>
-<<<<<<< HEAD
-    {(localStorage.getItem('userAuthToken'))?
-    <div className='flex justify-end mx-[100px] mt-6'>
-      
-    <button 
-    onClick={() => Navigate('/orders')} 
-  
-    className="middle none center mr-3 rounded-lg bg-green-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-    data-ripple-light="true"
-  >
-    My Orders
-  </button>
-    </div>
-    :<></>}
-=======
       {(localStorage.getItem('userAuthToken')) ?
         <>
           <div className='flex justify-end mx-[100px] mt-6'>
@@ -83,7 +68,7 @@ const Ngo = () => {
           <div className='flex mt-24 justify-around items-center' >
             <div className='text mx-10'>
               <h1 className='text-3xl font-bold'>Donating food is one of the simplest <br /> and most <span className='text-green-500' >
-                powerful ways to help <br />those in need.</span></h1>
+                powerful ways to help <br />those in need.</span></h1>
               <h6 className='text-gray-500 font-serif ml-96'>- Muhammad Ali
               </h6>
             </div>
@@ -116,7 +101,6 @@ const Ngo = () => {
         <div className='flex'>
         </div>
         : <></>}
->>>>>>> 1d741dd3917b07cd2a3b67aef681ae4d925c6d2b
       {(!localStorage.getItem('ngoAuthToken') && (!localStorage.getItem('userAuthToken')))
         ?
         <div className='mt-16'>
