@@ -3,7 +3,9 @@
 
 PlateLinker is a platform designed to connect restaurants with surplus food to nearby NGOs and charitable organizations. The goal is to reduce food waste and help feed the needy by facilitating the donation of surplus food in real-time.
 
-![platelinker_donation-ezgif com-resize](https://github.com/Kunal1223/NMIT_HACKS/assets/120008204/711cb340-dfde-49f8-a19f-33180aab12ae)
+
+![platelinker_donation](https://github.com/Kunal1223/NMIT_HACKS/assets/120008204/586bc90b-06d1-4399-91f7-1953a0289700)
+
 
 
 ## Table of Contents 
