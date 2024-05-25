@@ -31,35 +31,35 @@ export default function OrderState(props) {
     }
   };
   
-  const addOrder= async ( Restro, VegPackets, NonVngPackets, Messege ) => {
+  const addOrder = async (Restro, userEmail, VegPackets, VegPacketsType, NonVegPacketsType, NonVngPackets, Messege) => {
+
+    
     const response = await fetch(`${host}/api/auth/user/addorder`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem('token')
-
-
-      },
-
-      body: JSON.stringify({ Restro, VegPackets, NonVngPackets, Messege  }),
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem('token')
+        },
+        body: JSON.stringify({ Restro, userEmail, VegPackets, VegPacketsType, NonVegPacketsType, NonVngPackets, Messege })
     });
-    const json = response.json();
-
-    const order = {
-      "_id": "652000b85d79fc3d1b655f1y",
-      "user": "651fff175d79fc3d1b655f18",
-      "Restro": Restro,
-      "Messege":Messege,
-      "VegPackets": VegPackets,
-      "NonVngPackets": NonVngPackets,
-      "date": "2023-10-06T12:42:32.253Z",
-      "__v": 0
+    const json = await response.json();
+    console.log(json)
+    const newOrder = {
+        "_id": "652000b85d79fc3d1b655f1y",
+        "user": "651fff175d79fc3d1b655f18",
+        "Restro": Restro,
+        "Messege": Messege,
+        "VegPackets": VegPackets,
+        "NonVngPackets": NonVngPackets,
+        "VegPacketsType": VegPacketsType,
+        "NonVegPacketsType": NonVegPacketsType,
+        "userEmail": userEmail,
+        "date": "2023-10-06T12:42:32.253Z",
+        "__v": 0
     };
-    setOrder(order.concat(order))
-  }
 
-  
- 
+    setOrder(newOrder); // Simply set the new order object
+};
 
 
   //Edit a note

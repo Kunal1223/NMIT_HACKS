@@ -1,6 +1,7 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
+import orderContext from "../context/Order/orderContext";
 
 export default function ParticularResCard() {
   const navigate = useNavigate();
@@ -8,6 +9,7 @@ export default function ParticularResCard() {
   const location = useLocation();
   const resDetail = location.state ? location.state.resDetail : null;
   const { name, email, imageUrl } = resDetail || {};
+  
   const [userInfo, setUserInfo] = useState({
     veg: "",
     nonVeg: "", 
@@ -15,6 +17,10 @@ export default function ParticularResCard() {
     vegType: "regular meal",
     nonVegType: "regular meal",
   });
+
+  const context = useContext(orderContext);
+  const { addOrder } = context;
+  const userEmail = localStorage.getItem("email");
 
   const onChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
@@ -24,53 +30,63 @@ export default function ParticularResCard() {
     e.preventDefault();
   };
 
-  const userEmail = localStorage.getItem("email");
-
   const handlePaymentSubmit = async (e) => {
     e.preventDefault();
-    fetch(`http://localhost:5000/api/auth/res/paymentmail`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        veg: userInfo.veg,
-        nonVeg: userInfo.nonVeg,
-        message: userInfo.message,
-        remail: email,
-        uemail: userEmail,
-        name: name,
-        vmeal: userInfo.vegType,
-        nmeal: userInfo.nonVegType,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          alert(data.message);
-          navigate("/ngo");
-        } else {
-          alert(data.message);
-        }
+    const orderDetails = {
+      Restro: name,
+      userEmail,
+      VegPackets: userInfo.veg,
+      VegPacketsType: userInfo.vegType,
+      NonVegPacketsType: userInfo.nonVegType,
+      NonVngPackets: userInfo.nonVeg,
+      Messege: userInfo.message,
+    };
+
+    try {
+      await addOrder(
+        orderDetails.Restro,
+        orderDetails.userEmail,
+        orderDetails.VegPackets,
+        orderDetails.VegPacketsType,
+        orderDetails.NonVegPacketsType,
+        orderDetails.NonVngPackets,
+        orderDetails.Messege
+      );
+
+      const response = await fetch(`http://localhost:5000/api/auth/res/paymentmail`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          veg: userInfo.veg,
+          nonVeg: userInfo.nonVeg,
+          message: userInfo.message,
+          remail: email,
+          uemail: userEmail,
+          name: name,
+          vmeal: userInfo.vegType,
+          nmeal: userInfo.nonVegType,
+        }),
       });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert(data.message);
+        navigate("/ngo");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+    }
   };
 
   const mealOptions = [
-    {
-      value: "regular meal",
-      label: "Regular meal @ Rs 120",
-      description: "A regular meal with basic ingredients.",
-    },
-    {
-      value: "special meal",
-      label: "Special meal @ Rs 220",
-      description: "A special meal with additional sides.",
-    },
-    {
-      value: "premium meal",
-      label: "Premium meal @ Rs 320",
-      description: "A premium meal with gourmet ingredients.",
-    },
+    { value: "regular meal", label: "Regular meal @ Rs 120", description: "A regular meal with basic ingredients." },
+    { value: "special meal", label: "Special meal @ Rs 220", description: "A special meal with additional sides." },
+    { value: "premium meal", label: "Premium meal @ Rs 320", description: "A premium meal with gourmet ingredients." },
   ];
 
   return (
@@ -81,20 +97,12 @@ export default function ParticularResCard() {
       </div>
 
       <div className="flex mt-4 justify-around">
-        <form
-          className="mt-14"
-          action="#"
-          method="POST"
-          onSubmit={handleOnSubmit}
-        >
-          <h1 className="text-3xl font-medium text-center text-green-500">
-            Please Add Packets to Donate
-          </h1>
+        <form className="mt-14" onSubmit={handleOnSubmit}>
+          <h1 className="text-3xl font-medium text-center text-green-500">Please Add Packets to Donate</h1>
 
           <div className="form mt-10">
             <label className="text-sm font-medium text-center text-gray-500">
-              Enter the No of Veg Packets{" "}
-              <i className="fa-solid fa-circle text-green-500 mr-4"></i>
+              Enter the No of Veg Packets <i className="fa-solid fa-circle text-green-500 mr-4"></i>
             </label>
             <br />
             <div className="flex items-center">
@@ -123,9 +131,7 @@ export default function ParticularResCard() {
                   {mealOptions.map((option) => (
                     <div
                       key={option.value}
-                      className={`dropdown-item ${
-                        userInfo.vegType === option.value ? "block" : "hidden"
-                      }`}
+                      className={`dropdown-item ${userInfo.vegType === option.value ? "block" : "hidden"}`}
                     >
                       {option.description}
                     </div>
@@ -137,8 +143,7 @@ export default function ParticularResCard() {
 
           <div className="form mt-2">
             <label className="text-sm font-medium text-center text-gray-500">
-              Enter the No of NonVeg Packets{" "}
-              <i className="fa-solid fa-circle text-red-500 mr-4"></i>
+              Enter the No of NonVeg Packets <i className="fa-solid fa-circle text-red-500 mr-4"></i>
             </label>
             <br />
             <div className="flex items-center">
@@ -167,11 +172,7 @@ export default function ParticularResCard() {
                   {mealOptions.map((option) => (
                     <div
                       key={option.value}
-                      className={`dropdown-item ${
-                        userInfo.nonVegType === option.value
-                          ? "block"
-                          : "hidden"
-                      }`}
+                      className={`dropdown-item ${userInfo.nonVegType === option.value ? "block" : "hidden"}`}
                     >
                       {option.description}
                     </div>
