@@ -56,13 +56,15 @@ const Navbar = () => {
             <button onClick={() => removeToken('restroAuthToken')} className="mr-14 text-red-500 font-bold text-lg hover:text-red-600">Log Out</button>
           )}
 
-          <NavLink to={'/about'} className="mr-10 text-black-500 font-bold text-lg hover:text-green-600">About</NavLink>
-
           {!localStorage.getItem('userAuthToken') ? (
             <button onClick={handleSigninU} className="mr-14 text-black-500 font-bold text-lg hover:text-green-600">User Login</button>
           ) : (
             <button onClick={() => removeToken('userAuthToken')} className="mr-14 text-red-500 font-bold text-lg hover:text-red-600">Log Out</button>
           )}
+
+          <NavLink to={'/about'} className="mr-10 text-black-500 font-bold text-lg hover:text-green-600">About</NavLink>
+
+
         </div>
 
         {SigninNOpen && <SigninN show={SigninNOpen} close={() => setSigninNOpen(false)} />}

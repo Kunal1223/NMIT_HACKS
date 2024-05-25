@@ -40,7 +40,7 @@ const Home = () => {
         <div className='ml-32'>
           <h1 className='font-bold text-4xl'>Feed the Hungry, <br /> <span className='text-green-400'>Spread Joy.</span></h1>
           <p className='text-gray-700 mt-1'>Empowering restaurants to bring smiles by donating excess <br />food through our platform.</p>
-          <button className='bg-green-400 text-white p-2 hover:bg-green-700 rounded-xl mt-4'>Providing Meal<i className="fa-solid fa-plate-wheat ml-2"></i></button>
+          <button className='bg-green-400 text-white p-2 hover:bg-green-700 rounded-xl mt-4'>Provide Meal<i className="fa-solid fa-plate-wheat ml-2"></i></button>
         </div>
 
         <div>
