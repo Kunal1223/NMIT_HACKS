@@ -3,34 +3,22 @@ import orderContext from "../context/Order/orderContext";
 import { useLocation } from "react-router-dom";
 
 export default function OrderCard(props) {
-  const [isCanceling, setIsCanceling] = useState(false);
-  const [cancelSuccess, setCancelSuccess] = useState(false);
-  const [cancelError, setCancelError] = useState("");
-  const order_detail=props.order_detail
+  const order_detail = props.order_detail;
 
-  
   const orderDate = new Date(order_detail.date);
 
   // Format the date using toLocaleDateString or other formatting functions
-  const formattedDate = orderDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
+  const formattedDate = orderDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
   });
 
-
-
   //calculate price
-  let price=0;
-  
-  
-
-
-
-  
+ 
 
   return (
     <>
@@ -49,7 +37,7 @@ export default function OrderCard(props) {
                   <p className="font-semibold text-base leading-7 text-black mt-4">
                     Order Payment Date :{" "}
                     <span className="text-gray-400 font-medium">
-                     {formattedDate}
+                      {formattedDate}
                     </span>
                   </p>
                 </div>
@@ -64,17 +52,21 @@ export default function OrderCard(props) {
                       <div className="flex items-center">
                         <div>
                           <h2 className="font-semibold text-xl leading-8 text-black mb-3">
-                           {order_detail.Restro}
+                            {order_detail.Restro}
                           </h2>
-                          
+
                           <div className="flex items-center">
                             <p className="font-medium text-base leading-7 text-black pr-4 mr-4 border-r border-gray-200">
                               Vegetarian Packets:{" "}
-                              <span className="text-gray-500">{order_detail.VegPackets}</span>
+                              <span className="text-gray-500">
+                                {order_detail.VegPackets}
+                              </span>
                             </p>
                             <p className="font-medium text-base leading-7 text-black">
                               Non-Vegetarian Packets:{" "}
-                              <span className="text-gray-500">{order_detail.NonVngPackets}</span>
+                              <span className="text-gray-500">
+                                {order_detail.NonVngPackets}
+                              </span>
                             </p>
                           </div>
                         </div>
@@ -87,8 +79,7 @@ export default function OrderCard(props) {
                             </p>
                             <p className="lg:mt-4 font-medium text-sm leading-7 text-indigo-600">
                               {/* {order_detail.NonVegPacketsType} */}
-                              RS. {price}
-
+                              RS. {order_detail.totalPrice}
                             </p>
                           </div>
                         </div>
@@ -98,22 +89,22 @@ export default function OrderCard(props) {
                               Status
                             </p>
                             <p className="font-medium text-sm leading-6 py-0.5 px-3 whitespace-nowrap rounded-full lg:mt-3 bg-emerald-50 text-emerald-600">
-                            {order_detail.status}
+                              {order_detail.status}
                             </p>
+                            
                           </div>
+                          
                         </div>
-                       
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              
-              
             </div>
           </div>
         </section>
       </div>
+      
     </>
   );
 }

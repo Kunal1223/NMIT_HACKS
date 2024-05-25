@@ -7,7 +7,32 @@ export default function OrderState(props) {
 
   const [order, setOrder] = useState(orderInitial)
  
- 
+//get order detail using res email
+  const getOrderByres = async (email) => {
+    
+    try {
+      const response = await fetch(`${host}/api/auth/res/fetchallorders?email=${encodeURIComponent(email)}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // "auth-token": localStorage.getItem("userAuthToken"),
+        },
+      });
+
+      if (response.ok) {
+        console.error("Failed to fetch orders");
+      }
+      const json = await response.json();
+      
+      setOrder(json);
+    } catch (error) {
+      console.error("Error fetching orders:", error.message);
+      // Handle error, e.g., display a message to the user
+    }
+  };
+
+
+ //Search order using user email
   const getOrder = async (email) => {
     
     try {
@@ -31,16 +56,16 @@ export default function OrderState(props) {
     }
   };
   
-  const addOrder = async (Restro, userEmail, VegPackets, VegPacketsType, NonVegPacketsType, NonVngPackets, Messege) => {
+  const addOrder = async (Restro, userEmail, VegPackets, VegPacketsType, NonVegPacketsType, NonVngPackets, Messege ,resEmail,totalPrice) => {
 
     
     const response = await fetch(`${host}/api/auth/user/addorder`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem('token')
+            // "auth-token": localStorage.getItem('token')
         },
-        body: JSON.stringify({ Restro, userEmail, VegPackets, VegPacketsType, NonVegPacketsType, NonVngPackets, Messege })
+        body: JSON.stringify({ Restro, userEmail, VegPackets, VegPacketsType, NonVegPacketsType, NonVngPackets, Messege,resEmail ,totalPrice})
     });
     const json = await response.json();
     console.log(json)
@@ -54,6 +79,9 @@ export default function OrderState(props) {
         "VegPacketsType": VegPacketsType,
         "NonVegPacketsType": NonVegPacketsType,
         "userEmail": userEmail,
+        "resEmail":resEmail,
+        "price":totalPrice,
+        
         "date": "2023-10-06T12:42:32.253Z",
         "__v": 0
     };
@@ -63,40 +91,40 @@ export default function OrderState(props) {
 
 
   //Edit a note
-//   const editNote = async (id, title, description, tag) => {
+  // const editOrder = async (id, status) => {
 
 
-//     // Default options are marked with *
-//     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-//       method: "PUT",
-//       headers: {
-//         "Content-Type": "application/json",
-//         'auth-token': localStorage.getItem('token')
+  //   // Default options are marked with *
+  //   const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+        
 
 
-//       },
+  //     },
 
-//       body: JSON.stringify({ title, description, tag }),
-//     });
-//     const json = response.json();
+  //     body: JSON.stringify({ status }),
+  //   });
+  //   const json = response.json();
+  //   console.log(json)
 
 
+  //   // for (let index = 0; index < notes.length; index++) {
+  //   //   const element = notes[index];
+  //   //   if (element._id === id) {
+  //   //     element.title = title;
+  //   //     element.description = description;
+  //   //     element.tag = tag;
+  //   //   }
+  //   // }
 
-//     for (let index = 0; index < notes.length; index++) {
-//       const element = notes[index];
-//       if (element._id === id) {
-//         element.title = title;
-//         element.description = description;
-//         element.tag = tag;
-//       }
-//     }
-
-//   }
+  // }
 
 
   return (
-    <OrderContext.Provider value={{ order, setOrder, addOrder,getOrder }}>
-      {props.children}
+    <OrderContext.Provider value={{ order, setOrder, addOrder,getOrder,getOrderByres }}>
+      {props.children},
     </OrderContext.Provider>
   )
 }
