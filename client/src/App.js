@@ -12,11 +12,13 @@ import LoginError from './Components/Error404';
 import Packets from './Components/Restaurant/Packets';
 import ParticularCard from './Components/Restaurant/ParticularCard';
 import ParticularResCard from './Components/NGO/ParticularResCard';
-
+import Order from './Components/Userlogin/Order.js';
+import OrderState from './Components/context/Order/OrderState';
 
 function App() {
   return (
     <>
+       <OrderState>
       <RESState>
         <NGOState>
           <BrowserRouter>
@@ -30,11 +32,13 @@ function App() {
               <Route path='/about' element={<About />} />
               <Route path='/particular' element={<ParticularCard />} />
               <Route path='/particularres' element={<ParticularResCard />} />
+              <Route path='/orders' element={<Order/>} />
             </Routes>
             <Footer />
           </BrowserRouter>
         </NGOState >
       </RESState >
+      </OrderState>
     </>
   );
 }
