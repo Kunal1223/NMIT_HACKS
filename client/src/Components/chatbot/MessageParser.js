@@ -19,7 +19,7 @@ class MessageParser {
     else if (lowerCase.includes("requirements") || lowerCase.includes("registration")) {
       this.actionProvider.ngoHandler();
     } 
-    else if (lowerCase.includes("menu") || lowerCase.includes("choice of food")) {
+    else if (lowerCase.includes("menu") || lowerCase.includes("my choice") || lowerCase.includes("choice of food")) {
       this.actionProvider.menuyesHandler();
     } 
     else if (lowerCase.includes("thanks") || lowerCase.includes("thank you")) {
