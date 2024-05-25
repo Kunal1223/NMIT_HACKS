@@ -1,0 +1,26 @@
+/* ButtonStyles.css */
+
+/* Define the keyframes for the color animation */
+@keyframes colorChange {
+    0% {
+      background-color: rgb(59 130 246); /* Green */
+    }
+    25% {
+      background-color: #0bf50b; /* Light Green */
+    }
+    50% {
+      background-color: rgb(59 130 246); /* Lime Green */
+    }
+    75% {
+      background-color: #67f267; /* Emerald */
+    }
+    100% {
+      background-color: rgb(59 130 246); /* Green */
+    }
+  }
+  
+  /* Apply the animation to the button */
+  .animated-button {
+    animation: colorChange 8s infinite;
+  }
+  

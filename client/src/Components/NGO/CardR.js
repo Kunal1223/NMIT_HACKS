@@ -54,7 +54,7 @@ export default function CardR(props) {
           src={imageUrl}
           alt="event1"
         />
-        <div className="p-4">
+        <div className="p-3">
           <div className=" py-2">
             <div className="font-bold text-xl ">{name}</div>
           </div>

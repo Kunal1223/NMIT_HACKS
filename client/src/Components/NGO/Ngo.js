@@ -11,7 +11,7 @@ const Ngo = () => {
   const Navigate = useNavigate();
   const context = useContext(RESContext);
   const { RES, getRES } = context;
-  
+
   const email = localStorage.getItem('email');
   // console.log("inside ngo: " , localStorage.getItem('email'));
 
@@ -27,6 +27,7 @@ const Ngo = () => {
 
   return (
     <>
+<<<<<<< HEAD
     {(localStorage.getItem('userAuthToken'))?
     <div className='flex justify-end mx-[100px] mt-6'>
       
@@ -40,6 +41,82 @@ const Ngo = () => {
   </button>
     </div>
     :<></>}
+=======
+      {(localStorage.getItem('userAuthToken')) ?
+        <>
+          <div className='flex justify-end mx-[100px] mt-6'>
+            <button
+              onClick={() => Navigate('/orders')}
+
+              className="middle none center mr-3 rounded-lg bg-green-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              data-ripple-light="true"
+            >
+              My Orders
+            </button>
+          </div>
+        </>
+        :
+
+        <>
+        </>
+
+      }
+
+
+      {(!localStorage.getItem('userAuthToken')) ?
+        <div className='flex mt-14 justify-around items-center' >
+          <div className='text mx-10'>
+            <h1 className='text-3xl font-bold'>NGOs working to donate food are <br /> on the   <span className='text-green-500' >
+              front lines of the fight for justice.</span></h1>
+            <h6 className='text-gray-500 font-serif ml-96'>- Nelson Mandela</h6>
+          </div>
+
+          <div className='w-[420px]'>
+            <img src="/images/ngohand.png" alt="restro img" className='rounded-xl' />
+          </div>
+        </div>
+
+        :
+
+        <>
+
+          <div className='flex mt-24 justify-around items-center' >
+            <div className='text mx-10'>
+              <h1 className='text-3xl font-bold'>Donating food is one of the simplest <br /> and most <span className='text-green-500' >
+                powerful ways to help <br />those in need.</span></h1>
+              <h6 className='text-gray-500 font-serif ml-96'>- Muhammad Ali
+              </h6>
+            </div>
+
+            <div className='w-[420px] h-72'>
+              <img src="/images/donation.jpg" alt="restro img" className='rounded-xl' />
+            </div>
+          </div>
+        </>
+
+      }
+
+
+      {(!localStorage.getItem('userAuthToken')) ?
+        <>
+          <h1 className='mt-20 text-3xl font-bold text-center'>Look for available Donations</h1>
+          <hr className='ml-[34%] w-96 bg-green-600 h-[2px]' />
+        </>
+        :
+
+        <>
+          <h1 className='mt-20 text-3xl font-bold text-center'>Pick from Restaurants to Donate</h1>
+          <hr className='ml-[34%] w-96 bg-green-600 h-[2px]' />
+        </>
+
+      }
+
+
+      {(localStorage.getItem('userAuthToken')) ?
+        <div className='flex'>
+        </div>
+        : <></>}
+>>>>>>> 1d741dd3917b07cd2a3b67aef681ae4d925c6d2b
       {(!localStorage.getItem('ngoAuthToken') && (!localStorage.getItem('userAuthToken')))
         ?
         <div className='mt-16'>
