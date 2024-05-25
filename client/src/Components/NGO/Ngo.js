@@ -68,7 +68,7 @@ const Ngo = () => {
           <div className='flex mt-24 justify-around items-center' >
             <div className='text mx-10'>
               <h1 className='text-3xl font-bold'>Donating food is one of the simplest <br /> and most <span className='text-green-500' >
-                powerful ways to help <br />those in need.</span></h1>
+                powerful ways to help <br />those in need.</span></h1>
               <h6 className='text-gray-500 font-serif ml-96'>- Muhammad Ali
               </h6>
             </div>

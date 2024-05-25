@@ -21,7 +21,7 @@ export default function ResOrder() {
       }
     }, [])
 
-    // console.log(order)
+    console.log(order)
     return (
         <>
          {Array.isArray(order) && order.length > 0 ? (
