@@ -24,6 +24,8 @@ export default function Order() {
     console.log(order)
     return (
         <>
+         <h1 className='text-4xl font-bold text-center mt-20 ' >Your Order History</h1>
+          <hr className='ml-[41%] w-60 bg-green-600 h-[2px]' />
          {Array.isArray(order) && order.length > 0 ? (
           order.map((ord) => {
             return (

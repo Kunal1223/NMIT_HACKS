@@ -13,7 +13,7 @@ class MessageParser {
     else if (lowerCase.includes("platform works") || lowerCase.includes("tutorial") || lowerCase.includes("services")) {
       this.actionProvider.platformHandler();
     } 
-    else if (lowerCase.includes("active area") ||  lowerCase.includes("present")) {
+    else if (lowerCase.includes("present")) {
       this.actionProvider.locateHandler();
     } 
     else if (lowerCase.includes("requirements") || lowerCase.includes("registration")) {

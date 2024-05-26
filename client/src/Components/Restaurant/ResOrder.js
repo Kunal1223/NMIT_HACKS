@@ -24,6 +24,8 @@ export default function ResOrder() {
     console.log(order)
     return (
         <>
+          <h1 className='text-4xl font-bold text-center mt-20 ' >Received Orders</h1>
+          <hr className='ml-[41%] w-60 bg-green-600 h-[2px]' />
          {Array.isArray(order) && order.length > 0 ? (
           order.map((ord) => {
             return (
@@ -31,7 +33,7 @@ export default function ResOrder() {
           
             );
           })
-        ) : (
+        ) : ( 
           <p>No orders available</p>
         )}
         </>

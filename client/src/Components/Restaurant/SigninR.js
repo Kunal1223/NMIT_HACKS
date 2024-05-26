@@ -86,7 +86,7 @@ export default function Signin(props) {
                                     >
                                         <NavLink to={'/'}><img src="/images/logo.png" alt='logo' className='w-48 mx-auto' /></NavLink>
 
-                                        <h1 className='text-xl mt-8 font-bold'>Sign in With Restaurent Account </h1>
+                                        <h1 className='text-xl mt-8 font-bold'>Sign in With Restaurant Account </h1>
 
                                     </Dialog.Title>
                                     <div className="mt-2">
